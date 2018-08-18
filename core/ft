@@ -19,8 +19,6 @@ case $choose in
 esac
 }
 	
-
-
 function sqlmap()
 {
 pkg install git python2
@@ -39,15 +37,11 @@ case $choose in
 esac
 }
 
-
-
 function vim()
 {
 pkg install vim -y
 echo "Done"
 }
-
-
 
 function hexo()
 {
@@ -56,15 +50,11 @@ npm install hexo-cil -g
 echo "Done"
 }
 
-
-
 function nmap()
 {
 pkg install nmap -y
 echo "Done"
 }
-
-
 
 function red_hawk()
 {
@@ -83,8 +73,6 @@ case $choose in
 		::
 esac
 }
-
-
 
 function sqlscan()
 {
@@ -105,8 +93,6 @@ esac
 
 }
 
-
-
 function xattacker()
 {
 pkg install git
@@ -118,8 +104,6 @@ bash termux-install.sh
 
 echo "Done If prompted for error, please try the XAttacketfix in the menu."
 }
-
-
 
 function xattackerfix()
 {
@@ -140,8 +124,6 @@ do
 done
 
 }
-
-
 
 function rsf()
 {
@@ -164,8 +146,6 @@ esac
 
 }
 
-
-
 function wsf()
 {
 cd $HOME
@@ -176,8 +156,7 @@ echo "Do you want to set up a quick start command y/n"
 read choose
 case $choose in
 	y|Y)
-		echo -e "alias wsf=\"python2 $HOME/webslpoit/webslpoit\"" >>
-		$PREFIX/etc/bash.bashrc
+		echo -e "alias wsf=\"python2 $HOME/webslpoit/webslpoit\"" >> $PREFIX/etc/bash.bashrc
 		;;
 	n|N)
 		echo "Done"
@@ -186,29 +165,6 @@ esac
 
 }
 
-
-
-
-function hexogitblog()
-{
-echo "tell me where is you blog path"
-read &bp
-cd $bp
-echo "tell me what name is your blog dir name"
-read bdn
-mkdir &bdn
-cd &bdn
-hexo init
-npm install
-npm install hexo-deployer-git –save
-echo "tell me your github username"
-read username
-git config –global user.name “&username”
-echo "tell me your github email"
-git config –global user.email “&email”
-ssh-keygen -t rsa -C “&email”
-
-}
 
 function owscan()
 {
@@ -219,8 +175,7 @@ echo "Do you want to set up a quick start command y/n"
 read choose
 case $choose in
 	y|Y)
-		echo -e "alias owscan=\"bash $HOME/OWScan/owscan.php\"" >>
-		$PREFIX/etc/bash.bashrc
+		echo -e "alias owscan=\"bash $HOME/OWScan/owscan.php\"" >> $PREFIX/etc/bash.bashrc
 		echo -e "quick start command is \"owscan\""
 		;;
 	n|N)
@@ -242,11 +197,21 @@ echo "Do you want to set up a quick start command y/n"
 read choose
 case $choose in
 	y|Y)
-		echo -e "alias msfpc=\"bash $HOME/mpc/msfpc.sh\"" >>
-		$PREFIX/etc/bash.bashrc
+		echo -e "alias msfpc=\"bash $HOME/mpc/msfpc.sh\"" >> $PREFIX/etc/bash.bashrc
 		echo -e "quick start command is \"msfpc\""
 		;;
 	n|N)
 		echo "Done"
 		;;
-esac}
+esac
+}
+
+function atlio()
+{
+cd $HOME
+pkg in curl
+curl https://raw.githubusercontent.com/YadominJinta/atilo/master/atilo -o ~/atilo 
+chmod +x atilo
+echo -e "alias atlio=\"bash $HOME/alias\"" >> $PREFIX/etc/bash.bashrc
+echo -e "Done you can run \"atilo help\" to see how to use it"
+}

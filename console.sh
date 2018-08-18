@@ -1,26 +1,24 @@
 #!/bin/bash
-
-#while :
-#do
+source ./core/ft
 clear
-BLACK="\033[0;30m"
-BLUE="\033[0;34m"
 GREEN="\033[0;32m"
-CYAN="\033[0;36m"
+PURPLE="\033[0;35m"
 RED="\033[0;31m"
 PURPLE="\033[0;35m"
-BROWN="\033[0;33m"
-WHITE="\033[1;37m"
-COLOR_RESET="\033[0m"
 
-
-logo()
+function logo()
 {
+ji=`dpkg -l | grep ncurses-utils`
+if [ ! $ji ]
+then
+	pkg install ncurses-utils
+fi
+clear
 readonly sw=$[`tput cols`]
 sw1=$sw
 while(( $sw1>0 ))
 do
-echo -e ">\c"
+echo -e "${PURPLE}>\c"
 	let sw1--
 done
 sw2=$sw
@@ -68,60 +66,118 @@ do
 	echo -e ">\c"
 	let sw5--
 done
-echo ">"
+echo -e ">\033[0m"
+
 }
 
-logo
-
-menu(){
-echo -e ">Please enter the number before selection"
-echo -e ">1.metasploit-framework"
-echo -e ">2.vim"
-echo -e ">3.sqlmao"
-echo -e ">4.routersploit"
-echo -e ">5.hexo"
-echo -e "==============================================================="
-echo -e "(ง •̀_•́)ง >>\c"
-}
-#read pc
-#echo $pc
-
-
-msfconsole()
+function snmenu()
 {
-cd $HOME
-pkg install wget
-wget https://Auxilus.github.io/metasploit.sh
-bash metasploit.sh
-echo "Whether or not Configure the quick start PostgreSQL command y/n"
-read select
-case select in 
-	y)
-		echo -e "Enter your custom alias"
-		read customalias
-		bash
-		echo -e "alias \${customalias}\=\"pg_ctl -D $PREFIX/var/lib/postgresql start\"" > $PREFIX/etc/bash.bashrc
-	 ;;
-        n)
-		echo "metasploit-framework Installation success"
-		
-	 ;;
+	echo "[1]Back to main menu"
+	echo "[0]exit"
+	echo -e "ti-sk>>\c"
+	read snc
+	case $snc in
+		1)
+			menu
+			;;
+		0)
+			;;
+		*)
+			echo "Are you kidding me?"
+			snmenu
+	esac
+}
+
+function menu()
+{
+logo
+echo -e "${RED}[!].Please enter the number before selection\033[0m"
+echo -e "${GREEN}[1].metasploit-framework"
+echo "[2].sqlmap"
+echo "[3].vim"
+echo "[4].hexo"
+echo "[5].nmap"
+echo "[6].red_hawk"
+echo "[7].sqlscan"
+echo "[8].xattacker"
+echo "[9].xattackerfix"
+echo "[10].routersploit"
+echo "[11].websploit"
+echo "[12].owscan"
+echo "[13].msfpc"
+echo -e "[14].atlio(A bash script to install linux on termux)\033[0m"
+echo -e "${RED}[00].exit\033[0m"
+swn=$sw
+while(( $swn>0 ))
+do
+echo -e "${PURPLE}=\c"
+	let swn--
+done
+echo -e "ti-sk>>\c"
+read pc
+case $pc in 
+	1)
+		msfconsole
+		snmenu
+		;;
+	2)
+		sqlmap
+		snmenu
+		;;
+	3)
+		vim
+		snmenu
+		;;
+	4)
+		hexo
+		snmenu
+		;;
+	5)
+		nmap
+		snmenu
+		;;
+	6)
+		red_hawk
+		snmenu
+		;;
+	7)
+		sqlscan
+		snmenu
+		;;
+	8)
+		xattacker
+		snmenu
+		;;
+	9)
+		xattackerfix
+		snmenu
+		;;
+	10)
+		rsf
+		snmenu
+		;;
+	11)
+		wsf
+		snmenu
+		;;
+	12)
+		owscan
+		snmenu
+		;;
+	13)
+		msfpc
+		snmenu
+		;;
+	14)
+		atlio
+		snmenu
+		;;
+	00)
+		;;
+	*)
+		echo "Are you kidding me?"
+		menu
+		;;
 esac
 }
-	
-
-
-sqlmap(){
-apt update && apt upgrade
-apt install git python2
-git clone https://github.com/sqlmapproject/sqlmap.git
-mv sqlmap ~
-}
-        
-
-
-
-
-
-
-#done
+menu
